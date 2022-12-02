@@ -1,0 +1,141 @@
+// MINI SYNTHETISEUR
+
+/* 
+Do 3   = 261 Hz
+DO# 3  = 277 Hz
+Re 3   = 293 Hz
+Re# 3  = 311 Hz
+Mi 3   = 329 Hz
+Fa 3   = 349 Hz
+Fa# 3  = 370 Hz
+Sol 3  = 392 Hz
+Sol# 3 = 415 Hz
+La 3   = 440 Hz
+Si 3   = 493 Hz
+*/
+
+// 
+
+void setup() {
+
+  pinMode(PIN_BUZZER, OUTPUT);
+  pinMode(int 1, INPUT); // Do
+  pinMode(int 2, INPUT); // Do #
+  pinMode(int 3, INPUT); // Ré
+  pinMode(int 4, INPUT); // Ré #
+  pinMode(int 5, INPUT); // Mi
+  pinMode(int 6, INPUT); // Fa
+  pinMode(int 7, INPUT); // Fa #
+  pinMode(int 8, INPUT); // Sol
+  pinMode(int 9, INPUT); // Sol #
+  pinMode(int 10, INPUT); // La
+  pinMode(int 11, INPUT); // La #
+  pinMode(int 12, INPUT); // Si
+  pinMode(int 13, INPUT); // Do
+}
+
+void loop() {
+
+/*
+Le programme commence par lire l'état des entrées une-par-une (on appelera ça, un 'scan') afin de déterminer leur état (0 ou 1). Si une entrée est à 1, on considère que la touche associée est appuyée.
+La fonctione tone() rend notre 'mini synthé' monophonique = une note à la fois.
+Il nous faut donc décider ce que l'on fait si plusieurs touches sont appuyées en même temps.
+On décide que l'on donne la priorité à la dernière touche appuyée. Il faut trouver un algo qui permet de savoir laquelle
+Une fois un 'scan' effectué, le programme effectue l'algorythme suivant :
+
+  Est-ce que au moins une touche est appuyée ?
+
+    - OUI => est-ce que au moins une des touches n'était pas appuyée au scan d'avant ?
+      - OUI => on lance la nouvelle note
+      - NON => on rescan
+
+    - NON => on rescan
+*/
+
+int Do, 0;
+int Re, 0;
+int Mi, 0;
+int Fa, 0;
+int Sol, 0;
+int La, 0;
+int Si, 0;
+
+bool check_note, false;
+int tableau_1[12], {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+int tableau_2[12], {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+int tableau_ret[12], {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+int output_note, 0;
+
+while (check_note == false) { //input scan
+
+  // on lit toutes les entrées, sans s'arrêter. on écrit la valeur de chaque entrée dans un tableau (tableau_1)
+  // si l'entrée lue est à l'état haut, on écrit 1 dans le tableau
+  // si l'entrée lue est à l'état bas, on écrit rien (reste à 0 par défaut)
+  
+  if digitalRead(int 1){tableau_1[0] == 1; check_note == true; }
+  if digitalRead(int 2){tableau_1[1] == 1; check_note == true; }
+  if digitalRead(int 3){tableau_1[2] == 1; check_note == true; }
+  if digitalRead(int 4){tableau_1[3] == 1; check_note == true; }
+  if digitalRead(int 5){tableau_1[4] == 1; check_note == true; }
+  if digitalRead(int 6){tableau_1[5] == 1; check_note == true; }
+  if digitalRead(int 7){tableau_1[6] == 1; check_note == true; }
+  if digitalRead(int 8){tableau_1[7] == 1; check_note == true; }
+  if digitalRead(int 9){tableau_1[8] == 1; check_note == true; }
+  if digitalRead(int 10){tableau_1[9] == 1; check_note == true; }
+  if digitalRead(int 11){tableau_1[10] == 1; check_note == true; }
+  if digitalRead(int 12){tableau_1[11] == 1; check_note == true; }
+  }
+
+/*
+t true / t+1 true => true
+t false / t+1 true => false
+t false / t+1 false => false
+t true / t+1 false => false
+*/
+
+// voice allocation algorythm
+
+ttableau_1 {0,0,0,1};
+ttableau_2 {1,0,0,1};
+tableau_ret {0,0,0,0};
+for(int i = 0; i < 4; ++i) {
+    tableau_ret[i] = tableau_1[i] & tableau_2[i];
+}
+
+noTone(PIN_BUZZER);
+
+if (output_note == 1){
+  tone(PIN_BUZZER,262);
+  digitalWrite(8,HIGH);
+  }
+
+if (output_note == 2){
+  tone(PIN_BUZZER,293);
+  digitalWrite(9,HIGH);
+  }
+
+if (output_note == 3){
+  tone(PIN_BUZZER,329);
+  digitalWrite(10,HIGH);
+  }
+
+if (output_note == 4){
+  tone(PIN_BUZZER,349);
+  digitalWrite(11,HIGH);
+  }
+
+if (output_note == 5){
+  tone(PIN_BUZZER,392);
+  digitalWrite(12,HIGH);
+  }
+
+if (output_note == 6){
+  tone(PIN_BUZZER,440);
+  digitalWrite(13,HIGH);
+}
+
+if (output_note ==7){
+  tone(PIN_BUZZER,493);
+  digitalWrite(14,HIGH);
+}
+
